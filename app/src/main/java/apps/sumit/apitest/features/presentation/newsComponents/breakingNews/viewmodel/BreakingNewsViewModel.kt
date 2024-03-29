@@ -1,4 +1,4 @@
-package apps.sumit.apitest.features.presentation.newsComponents.viewmodel
+package apps.sumit.apitest.features.presentation.newsComponents.breakingNews.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

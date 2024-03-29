@@ -1,4 +1,4 @@
-package apps.sumit.apitest.features.presentation.newsComponents
+package apps.sumit.apitest.features.presentation.common
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
