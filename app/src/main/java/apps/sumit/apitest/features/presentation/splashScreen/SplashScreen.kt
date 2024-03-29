@@ -4,6 +4,7 @@ import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import apps.sumit.apitest.R
+import apps.sumit.apitest.features.presentation.ui.theme.DeepBlue
 import apps.sumit.apitest.features.presentation.util.Screen
 import kotlinx.coroutines.delay
 
@@ -28,7 +30,7 @@ fun SplashScreen(
 
     LaunchedEffect(key1 = true) {
         scale.animateTo(
-            targetValue = .5f,
+            targetValue = 1.5f,
             animationSpec = tween(
                 durationMillis = 500,
                 easing = {
@@ -46,7 +48,9 @@ fun SplashScreen(
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(DeepBlue)
     ) {
 
 
