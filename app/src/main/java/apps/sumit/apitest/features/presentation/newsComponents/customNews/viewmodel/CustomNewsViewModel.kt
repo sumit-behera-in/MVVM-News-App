@@ -23,6 +23,8 @@ class CustomNewsViewModel @Inject constructor(
     private val _state = mutableStateOf(GetNewsState())
     val state = _state
 
+    val changed = mutableStateOf(true)
+
     fun getNews(query: String) {
         getNewsUseCase(query).onEach { result ->
             when (result) {

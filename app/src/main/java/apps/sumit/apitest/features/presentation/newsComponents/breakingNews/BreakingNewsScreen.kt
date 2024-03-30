@@ -3,8 +3,8 @@ package apps.sumit.apitest.features.presentation.newsComponents.breakingNews
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import apps.sumit.apitest.features.presentation.common.SingleNews
@@ -17,7 +17,14 @@ fun BreakingNewsScreen(
     viewModel: BreakingNewsViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
-    state.newsList?.let { Text(text = it.type) }
+
+    LaunchedEffect(true) {
+        if (viewModel.changed.value) {
+            viewModel.changed.value = false
+            viewModel.getNews()
+        }
+    }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()

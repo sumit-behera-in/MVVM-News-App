@@ -2,7 +2,6 @@ package apps.sumit.apitest.features.presentation.newsComponents.customNews
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -17,12 +16,13 @@ fun CustomNewsScreen(
     viewModel: CustomNewsViewModel = hiltViewModel(),
 ) {
     LaunchedEffect(true) {
-        viewModel.getNews(query)
+        if (viewModel.changed.value) {
+            viewModel.changed.value = false
+            viewModel.getNews(query)
+        }
     }
 
     val state = viewModel.state.value
-
-    state.newsList?.let { Text(text = query) }
 
     LazyColumn(modifier = modifier.fillMaxSize()) {
         state.newsList?.newsList?.let { it ->

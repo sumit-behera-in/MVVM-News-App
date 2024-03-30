@@ -28,11 +28,16 @@ fun BottomMenu(
     activeTextColor: Color = Color.White,
     inActiveTextColor: Color = AquaBlue,
     initializedSelectedIndex: Int = 0,
-    selectedItem:(Int) -> Unit
+    selectedItem: (Int) -> Unit,
 ) {
     var selectedItemIndex by remember {
         mutableIntStateOf(initializedSelectedIndex)
     }
+
+//    BackHandler {
+//        selectedItemIndex = 0
+//    }
+
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically,

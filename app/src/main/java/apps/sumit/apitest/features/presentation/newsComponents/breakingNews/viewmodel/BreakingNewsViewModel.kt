@@ -23,11 +23,9 @@ class BreakingNewsViewModel @Inject constructor(
     private val _state = mutableStateOf(GetNewsState())
     val state = _state
 
-    init {
-        getNews()
-    }
+    val changed = mutableStateOf(true)
 
-    private fun getNews() {
+    fun getNews() {
         getBreakingNewsUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> {

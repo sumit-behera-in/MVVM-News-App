@@ -12,3 +12,5 @@ val Pink40 = Color(0xFF7D5260)
 
 val DeepBlue = Color(0xff06164c)
 val TextWhite = Color(0xFFB2B9E6)
+val ButtonBlue = Color(0xff505cf3)
+val AquaBlue = Color(0xff9aa5c4)

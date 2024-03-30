@@ -1,4 +1,4 @@
-package apps.sumit.apitest.features.presentation.common
+package apps.sumit.apitest.features.presentation.mainScreen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
