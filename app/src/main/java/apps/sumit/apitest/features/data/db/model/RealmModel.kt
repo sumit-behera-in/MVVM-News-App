@@ -1,4 +1,4 @@
-package apps.sumit.apitest.features.data.db
+package apps.sumit.apitest.features.data.db.model
 
 import apps.sumit.apitest.features.domain.model.News
 import io.realm.kotlin.types.RealmObject

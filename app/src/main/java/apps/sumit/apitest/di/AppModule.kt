@@ -1,7 +1,7 @@
 package apps.sumit.apitest.di
 
 import apps.sumit.apitest.common.Constants.BASE_URL
-import apps.sumit.apitest.features.data.db.RealmModel
+import apps.sumit.apitest.features.data.db.model.RealmModel
 import apps.sumit.apitest.features.data.db.repository.NewsRepoRealm
 import apps.sumit.apitest.features.data.remote.NewsApi
 import apps.sumit.apitest.features.data.remote.repository.NewsRepoRemote

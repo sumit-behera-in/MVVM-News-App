@@ -1,7 +1,7 @@
 package apps.sumit.apitest.features.data.db.repository
 
-import apps.sumit.apitest.features.data.db.RealmModel
-import apps.sumit.apitest.features.data.db.toNews
+import apps.sumit.apitest.features.data.db.model.RealmModel
+import apps.sumit.apitest.features.data.db.model.toNews
 import apps.sumit.apitest.features.domain.model.NewsList
 import apps.sumit.apitest.features.domain.repository.NewsRepository
 import io.realm.kotlin.Realm

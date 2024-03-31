@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apps.sumit.apitest.common.Resource
-import apps.sumit.apitest.features.data.db.RealmModel
+import apps.sumit.apitest.features.data.db.model.RealmModel
 import apps.sumit.apitest.features.domain.model.NewsList
 import apps.sumit.apitest.features.domain.use_case.GetBreakingNewsUseCase
 import apps.sumit.apitest.features.presentation.common.GetNewsState
