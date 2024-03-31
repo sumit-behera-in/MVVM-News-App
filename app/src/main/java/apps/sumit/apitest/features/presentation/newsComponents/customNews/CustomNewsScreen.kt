@@ -10,6 +10,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import apps.sumit.apitest.features.presentation.common.SingleNews
 import apps.sumit.apitest.features.presentation.newsComponents.customNews.viewmodel.CustomNewsViewModel
 
@@ -18,6 +19,7 @@ fun CustomNewsScreen(
     query: String,
     modifier: Modifier = Modifier,
     viewModel: CustomNewsViewModel = hiltViewModel(),
+    parentNavHostController: NavHostController,
 ) {
     LaunchedEffect(true) {
         if (viewModel.changed.value) {
@@ -41,7 +43,10 @@ fun CustomNewsScreen(
             state.newsList?.newsList?.let { it ->
                 items(it.size) { i ->
                     if (state.newsList.newsList[i].title != "[Removed]")
-                        SingleNews(news = state.newsList.newsList[i])
+                        SingleNews(
+                            news = state.newsList.newsList[i],
+                            navHostController = parentNavHostController
+                        )
                 }
             }
         }

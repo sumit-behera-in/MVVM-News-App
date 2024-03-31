@@ -1,5 +1,6 @@
 package apps.sumit.apitest.features.presentation.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,20 +17,32 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import apps.sumit.apitest.R
 import apps.sumit.apitest.features.domain.model.News
+import apps.sumit.apitest.features.presentation.util.Screen
 import coil.compose.AsyncImage
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun SingleNews(
     modifier: Modifier = Modifier,
     news: News,
+    navHostController: NavHostController,
 ) {
     Card(
         elevation = CardDefaults.cardElevation(10.dp),
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable {
+                val encodedUrl = URLEncoder.encode(
+                    news.url,
+                    StandardCharsets.UTF_8.toString()
+                )
+                navHostController.navigate(route = Screen.WebViewScreen.route + "/url=${encodedUrl}")
+            }
     ) {
         Column(
             Modifier

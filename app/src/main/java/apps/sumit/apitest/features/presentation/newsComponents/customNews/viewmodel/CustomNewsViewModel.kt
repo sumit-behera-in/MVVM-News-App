@@ -33,8 +33,8 @@ class CustomNewsViewModel @Inject constructor(
 
                         realm.writeBlocking {
                             // Selected by a query
-                            val query = this.query<RealmModel>("type = $0", query)
-                            delete(query)
+                            val realmQuery = this.query<RealmModel>("type = $0", query)
+                            delete(realmQuery)
                         }
 
                         realm.write {

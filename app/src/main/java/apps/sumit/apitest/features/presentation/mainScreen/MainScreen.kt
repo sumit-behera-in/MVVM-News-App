@@ -17,11 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import apps.sumit.apitest.features.presentation.mainScreen.components.BottomMenu
 import apps.sumit.apitest.features.presentation.mainScreen.components.NewsScreenTopSection
 import apps.sumit.apitest.features.presentation.newsComponents.breakingNews.BreakingNewsScreen
@@ -32,7 +30,7 @@ import apps.sumit.apitest.features.presentation.util.Constants.screenList
 import apps.sumit.apitest.features.presentation.util.Screen
 
 @Composable
-fun MainScreen() {
+fun MainScreen(parentNavHostController: NavHostController) {
 
     var screen by remember {
         mutableStateOf("Breaking News")
@@ -100,14 +98,22 @@ fun MainScreen() {
             Modifier
                 .background(DeepBlue)
                 .padding(it),
-            navController = navController
+            navController = navController,
+            parentNavHostController
         )
     }
 }
 
 @Composable
-fun Greeting(modifier: Modifier = Modifier, navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.BreakingNewsScreen.route) {
+fun Greeting(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    parentNavHostController: NavHostController,
+) {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.BreakingNewsScreen.route
+    ) {
         composable(
             route = Screen.BreakingNewsScreen.route,
             enterTransition = {
@@ -127,16 +133,10 @@ fun Greeting(modifier: Modifier = Modifier, navController: NavHostController) {
                 )
             }
         ) {
-            BreakingNewsScreen(modifier)
+            BreakingNewsScreen(modifier, navHostController = parentNavHostController)
         }
         composable(
             route = Screen.CustomNewsScreen.route + "query={query}",
-            arguments = listOf(
-                navArgument(name = "query") {
-                    type = NavType.StringType
-                    defaultValue = "trending"
-                }
-            ),
             enterTransition = {
                 slideIn(
                     animationSpec = tween(200),
@@ -154,8 +154,18 @@ fun Greeting(modifier: Modifier = Modifier, navController: NavHostController) {
                 )
             }
         ) {
+//            navArgument(name = "query") {
+//                type = NavType.StringType
+//                defaultValue = "trending"
+//            }
+
             val query = it.arguments?.getString("query") ?: "trending"
-            CustomNewsScreen(query = query, modifier = modifier)
+            CustomNewsScreen(
+                query = query,
+                modifier = modifier,
+                parentNavHostController = parentNavHostController
+            )
         }
+
     }
 }

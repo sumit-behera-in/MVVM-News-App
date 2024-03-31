@@ -91,4 +91,8 @@ dependencies {
     // coil
     implementation("io.coil-kt:coil-compose:2.6.0")
 
+    // webView
+    implementation("androidx.webkit:webkit:1.10.0")
+
+
 }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import apps.sumit.apitest.features.presentation.common.SingleNews
 import apps.sumit.apitest.features.presentation.newsComponents.breakingNews.viewmodel.BreakingNewsViewModel
 import apps.sumit.apitest.features.presentation.ui.theme.DeepBlue
@@ -19,6 +20,7 @@ import apps.sumit.apitest.features.presentation.ui.theme.DeepBlue
 fun BreakingNewsScreen(
     modifier: Modifier = Modifier,
     viewModel: BreakingNewsViewModel = hiltViewModel(),
+    navHostController: NavHostController,
 ) {
     val state = viewModel.state.value
 
@@ -43,10 +45,13 @@ fun BreakingNewsScreen(
                 .fillMaxSize()
                 .background(DeepBlue)
         ) {
-            state.newsList?.newsList?.let { it ->
-                items(it.size) { i ->
+            state.newsList?.newsList?.let { newsList ->
+                items(newsList.size) { i ->
                     if (state.newsList.newsList[i].title != "[Removed]")
-                        SingleNews(news = state.newsList.newsList[i])
+                        SingleNews(
+                            news = state.newsList.newsList[i],
+                            navHostController = navHostController
+                        )
                 }
             }
         }
