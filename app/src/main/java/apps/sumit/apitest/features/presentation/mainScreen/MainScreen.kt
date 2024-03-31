@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -21,7 +17,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import apps.sumit.apitest.features.presentation.mainScreen.components.BottomMenu
-import apps.sumit.apitest.features.presentation.mainScreen.components.NewsScreenTopSection
 import apps.sumit.apitest.features.presentation.newsComponents.breakingNews.BreakingNewsScreen
 import apps.sumit.apitest.features.presentation.newsComponents.customNews.CustomNewsScreen
 import apps.sumit.apitest.features.presentation.ui.theme.DeepBlue
@@ -32,9 +27,6 @@ import apps.sumit.apitest.features.presentation.util.Screen
 @Composable
 fun MainScreen(parentNavHostController: NavHostController) {
 
-    var screen by remember {
-        mutableStateOf("Breaking News")
-    }
 
     val navController = rememberNavController()
 
@@ -55,15 +47,12 @@ fun MainScreen(parentNavHostController: NavHostController) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
-        topBar = {
-            NewsScreenTopSection(text = screen)
-        },
+
         bottomBar = {
             BottomMenu(
                 items = bottomMenuContents,
                 modifier = Modifier.height(65.dp),
             ) {
-                screen = screenList[it]
                 navController.popBackStack()
                 when (it) {
                     0 -> {
@@ -71,23 +60,23 @@ fun MainScreen(parentNavHostController: NavHostController) {
                     }
 
                     1 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"finance"}")
+                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"finance"}/screen=${screenList[it]}")
                     }
 
                     2 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"science"}")
+                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"science"}/screen=${screenList[it]}")
                     }
 
                     3 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"technology"}")
+                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"technology"}/screen=${screenList[it]}")
                     }
 
                     4 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"game"}")
+                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"game"}/screen=${screenList[it]}")
                     }
 
                     5 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"entertainment"}")
+                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"bollywood"}/screen=${screenList[it]}")
                     }
                 }
 
@@ -103,6 +92,7 @@ fun MainScreen(parentNavHostController: NavHostController) {
         )
     }
 }
+
 
 @Composable
 fun Greeting(
@@ -136,7 +126,7 @@ fun Greeting(
             BreakingNewsScreen(modifier, navHostController = parentNavHostController)
         }
         composable(
-            route = Screen.CustomNewsScreen.route + "query={query}",
+            route = Screen.CustomNewsScreen.route + "query={query}/screen={screen}",
             enterTransition = {
                 slideIn(
                     animationSpec = tween(200),
@@ -160,10 +150,12 @@ fun Greeting(
 //            }
 
             val query = it.arguments?.getString("query") ?: "trending"
+            val screen = it.arguments?.getString("screen") ?: "Trending News"
             CustomNewsScreen(
                 query = query,
                 modifier = modifier,
-                parentNavHostController = parentNavHostController
+                parentNavHostController = parentNavHostController,
+                screen = screen
             )
         }
 
