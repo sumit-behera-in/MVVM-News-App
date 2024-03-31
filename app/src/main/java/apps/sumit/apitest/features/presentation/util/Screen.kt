@@ -5,6 +5,6 @@ sealed class Screen(val route: String) {
     data object CustomNewsScreen : Screen("CustomNewsScreen")
     data object MainScreen : Screen("MainScreen")
     data object SplashScreen : Screen("SplashScreen")
-
     data object WebViewScreen : Screen("WebViewScreen")
+    data object OpenBrowser : Screen("OpenBrowser")
 }

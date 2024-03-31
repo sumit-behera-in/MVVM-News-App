@@ -66,7 +66,11 @@ class MainActivity : ComponentActivity() {
 
                         val url =
                             it.arguments?.getString("url") ?: "https://github.com/sumitbehera1508"
-                        WebViewScreen(modifier = Modifier.fillMaxSize(), mUrl = url)
+
+                        WebViewScreen(
+                            modifier = Modifier.fillMaxSize(),
+                            mUrl = url
+                        )
 
                     }
 
