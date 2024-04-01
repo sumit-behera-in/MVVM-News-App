@@ -89,31 +89,47 @@ fun MainScreen(parentNavHostController: NavHostController) {
                 modifier = Modifier.height(65.dp),
             ) {
                 navController.popBackStack()
-
-                screen = screenList[it]
                 when (it) {
                     0 -> {
-                        navController.navigate(Screen.BreakingNewsScreen.route)
+                        if (screen != screenList[0]) {
+                            navController.navigate(Screen.BreakingNewsScreen.route)
+                            screen = screenList[it]
+                        }
                     }
 
                     1 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"finance"}")
+                        if (screen != screenList[1]) {
+                            navController.navigate(Screen.CustomNewsScreen.route + "query=${"finance"}")
+                            screen = screenList[it]
+                        }
                     }
 
                     2 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"science"}")
+                        if (screen != screenList[2]) {
+                            navController.navigate(Screen.CustomNewsScreen.route + "query=${"science"}")
+                            screen = screenList[it]
+                        }
                     }
 
                     3 -> {
-                        navController.navigate(Screen.SearchNewsScreen.route)
+                        if (screen != screenList[3]) {
+                            navController.navigate(Screen.SearchNewsScreen.route)
+                            screen = screenList[it]
+                        }
                     }
 
                     4 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"game"}")
+                        if (screen != screenList[4]) {
+                            navController.navigate(Screen.CustomNewsScreen.route + "query=${"game"}")
+                            screen = screenList[it]
+                        }
                     }
 
                     5 -> {
-                        navController.navigate(Screen.CustomNewsScreen.route + "query=${"bollywood"}")
+                        if (screen != screenList[5]) {
+                            navController.navigate(Screen.CustomNewsScreen.route + "query=${"bollywood"}")
+                            screen = screenList[it]
+                        }
                     }
                 }
 
