@@ -45,84 +45,34 @@ fun BreakingNewsScreen(
 ) {
     val state = viewModel.state.value
 
-    var isSearching by remember {
-        mutableStateOf(false)
-    }
-
     LaunchedEffect(true) {
         if (viewModel.changed.value) {
             viewModel.changed.value = false
             viewModel.getNews()
         }
     }
-
-    Scaffold(
-        topBar = {
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp)
-                    .background(DeepBlue)
-            ) {
-
-                if (!isSearching) {
-                    Text(
-                        text = "Breaking News",
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 20.sp,
-                        color = TextWhite
-                    )
-                } else {
-                    val text = remember { mutableStateOf(TextFieldValue("")) }
-
-                    TextField(
-                        value = text.value,
-                        onValueChange = { text.value = it },
-                        placeholder = { Text("Enter Your Text") },
-                        modifier = Modifier.fillMaxWidth(0.9f)
-                    )
-                }
-
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = "Search",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clickable {
-                            isSearching = !isSearching
-                        }
-                )
-            }
+    if (state.isLoading) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .fillMaxSize()
+        ) {
+            CircularProgressIndicator()
         }
-    ) {
-        if (state.isLoading) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(it)
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            LazyColumn(
-                modifier = modifier
-                    .fillMaxSize()
-                    .background(DeepBlue)
-                    .padding(it)
-            ) {
-                state.newsList?.newsList?.let { newsList ->
-                    items(newsList.size) { i ->
-                        if (state.newsList.newsList[i].title != "[Removed]")
-                            SingleNews(
-                                news = state.newsList.newsList[i],
-                                navHostController = navHostController
-                            )
-                    }
+    } else {
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .background(DeepBlue)
+        ) {
+            state.newsList?.newsList?.let { newsList ->
+                items(newsList.size) { i ->
+                    if (state.newsList.newsList[i].title != "[Removed]")
+                        SingleNews(
+                            news = state.newsList.newsList[i],
+                            navHostController = navHostController
+                        )
                 }
             }
         }
